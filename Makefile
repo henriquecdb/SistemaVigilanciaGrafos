@@ -3,4 +3,5 @@ all:
 clean:
 	rm bin/progGrafos
 run:
+	mkdir -p bin
 	./bin/progGrafos
