@@ -36,29 +36,24 @@ void Grafo::imprimirGrafo() {
   }
 }
 
-void Grafo::encontrarCameras()
-{
+void Grafo::encontrarCameras() {
   cameras.clear();
 
   vector<bool> corredorCoberto(grafo.size(), false);
 
-  for (int i = 0; i < grafo.size(); i++)
-  {
+  for (int i = 0; i < grafo.size(); i++) {
     bool cobreCorredor = false;
 
-    for (int j = 0; j < grafo[i].size(); j++)
-    {
+    for (int j = 0; j < grafo[i].size(); j++) {
       int corredor = grafo[i][j];
 
-      if (!corredorCoberto[corredor])
-      {
+      if (!corredorCoberto[corredor]) {
         cobreCorredor = true;
         corredorCoberto[corredor] = true;
       }
     }
 
-    if (!cobreCorredor)
-    {
+    if (!cobreCorredor) {
       cameras.insert(i);
     }
   }
