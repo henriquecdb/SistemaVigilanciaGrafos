@@ -19,7 +19,8 @@ public:
     Grafo(const string &nomeArquivo);
     void adicionarAresta(int origem, int destino);
     void imprimirGrafo();
-    void encontrarCameras();
+    void encontrarCamerasAproximado();
+    bool todasArestasCobertas(const vector<bool> &arestasCobertas);
     void imprimirCameras();
 };
 
