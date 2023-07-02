@@ -34,4 +34,4 @@
 # Extras
 .vscode
 /bin
-backup.cpp
+backup*.cpp

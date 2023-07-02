@@ -41,8 +41,8 @@ void Grafo::encontrarCamerasAproximado() {
   vector<bool> arestasCobertas(grafo.size(), false);
   while (!todasArestasCobertas(arestasCobertas)) {
     int maxGrau = -1;
-    int verticeSelecionado = -1;
-    // Seleciona o vértice de maior grau não coberto
+    set<int> verticesSelecionados;
+    // Calcula o maior grau
     for (int i = 0; i < grafo.size(); i++) {
       if (!arestasCobertas[i]) {
         int grau = 0;
@@ -53,15 +53,30 @@ void Grafo::encontrarCamerasAproximado() {
         }
         if (grau > maxGrau) {
           maxGrau = grau;
-          verticeSelecionado = i;
         }
       }
     }
-    // Marca as arestas adjacentes ao vértice selecionado como cobertas
-    cameras.insert(verticeSelecionado);
-    arestasCobertas[verticeSelecionado] = true;
-    for (int adjacente : grafo[verticeSelecionado]) {
-      arestasCobertas[adjacente] = true;
+    // Seleciona todos os vértices com o maior grau
+    for (int i = 0; i < grafo.size(); i++) {
+      if (!arestasCobertas[i]) {
+        int grau = 0;
+        for (int adjacente : grafo[i]) {
+          if (!arestasCobertas[adjacente]) {
+            grau++;
+          }
+        }
+        if (grau == maxGrau) {
+          verticesSelecionados.insert(i);
+        }
+      }
+    }
+    // Marca as arestas adjacentes aos vértices selecionados como cobertas
+    for (int vertice : verticesSelecionados) {
+      cameras.insert(vertice);
+      arestasCobertas[vertice] = true;
+      for (int adjacente : grafo[vertice]) {
+        arestasCobertas[adjacente] = true;
+      }
     }
   }
 }
